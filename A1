@@ -36,6 +36,7 @@ void draw() {
       
       int method = 2;
 saveFrame();
+
 switch (method) {
       case 0:
 
