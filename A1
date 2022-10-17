@@ -1,0 +1,79 @@
+int cols = 10;
+int rows = 10;
+
+int stepx, stepy;
+
+
+int rand_switch = 0;
+
+void setup() {
+
+  size(300, 300);
+  fill(0);
+  stroke(32, 43, 226);
+  stroke(32, 226, 124);
+
+
+  stepx = (width/cols);
+  stepy = (height/cols);
+}
+
+
+void draw() {
+  background(0);
+
+
+  for (int y = 0; y < rows; y++) {
+    for (int x = 0; x < cols; x++) {
+
+
+      float xp = x*stepx;
+      float yp = y*stepy;
+
+    
+      int offset = stepx/2;
+
+      
+      int method = 2;
+saveFrame();
+switch (method) {
+      case 0:
+
+      
+        rand_switch = int(random(4));
+        break;
+
+      case 1:
+
+   
+        rand_switch = int(map (sin((x+offset)+(y+offset)*frameCount*0.001), -1, 1, 0, 4));
+        break;
+
+      case 2:
+
+        
+        float distance = dist(width/2, height/2, xp, yp) + sin(frameCount*0.05)*200;
+
+        rand_switch = int(map(distance, 0, width/2+(offset), 0, 3)) ;
+        break;
+      }
+
+
+      
+      if (rand_switch == 0) {
+        arc(offset+xp, offset+yp, stepx, stepy, radians(0), radians(90));
+      }
+
+      if (rand_switch == 1) {
+        arc(offset+xp, offset+yp, stepx, stepy, radians(90), radians(180));
+      }
+
+      if (rand_switch == 2) {
+        arc(offset+xp, offset+yp, stepx, stepy, radians(180), radians(270));
+      }
+      if (rand_switch == 3) {
+        arc(offset+xp, offset+yp, stepx, stepy, radians(270), radians(360));
+      }
+    }
+  }
+}
